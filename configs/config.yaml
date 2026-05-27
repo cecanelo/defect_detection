@@ -1,0 +1,29 @@
+data:
+  train_dir: data/train
+  test_dir: data/test
+  img_size: 224
+  num_workers: 4
+
+model:
+  name: custom_cnn
+  num_classes: 2
+  dropout: 0.5
+
+training:
+  batch_size: 32
+  epochs: 20
+  learning_rate: 0.001
+  weight_decay: 1.0e-4
+
+augmentation:
+  random_horizontal_flip: true
+  random_vertical_flip: true
+  random_rotation: 15
+
+mlflow:
+  experiment_name: casting-defect-classifier
+  tracking_uri: experiments/mlruns
+  run_name: baseline
+
+paths:
+  checkpoint_dir: experiments/checkpoints
