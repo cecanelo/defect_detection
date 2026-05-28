@@ -8,6 +8,7 @@ model:
   name: custom_cnn
   num_classes: 2
   dropout: 0.5
+  hidden_size: 256
 
 training:
   batch_size: 32
