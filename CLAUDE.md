@@ -67,5 +67,5 @@ python src/train.py --config configs/config.yaml
 
 - Train: 3,758 defective, 2,875 ok (defective is majority class)
 - Test: 453 defective, 262 ok
-- Class imbalance may require loss weighting -- to be addressed in training loop
+- Recall preference is expressed via F-beta (beta=2) at checkpoint selection, not loss weighting; defective is the majority class so no imbalance correction is needed
 - ImageFolder class labels: def_front=0, ok_front=1 (assigned alphabetically)
