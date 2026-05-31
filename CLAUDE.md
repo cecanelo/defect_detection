@@ -41,11 +41,13 @@ source venv/bin/activate
 pytest tests/ -v
 ```
 
-## Running Training (not yet implemented)
+## Running Training
 
 ```bash
-python src/train.py --config configs/config.yaml
+python -m src.train --config configs/config.yaml
 ```
+
+Note: must use `-m src.train` (not `python src/train.py`) so Python runs from the project root and can resolve the `src` package.
 
 ## Key Design Decisions
 
@@ -61,7 +63,7 @@ python src/train.py --config configs/config.yaml
 
 1. Local setup -- done
 2. Data pipeline -- done
-3. Baseline CNN -- in progress
+3. Baseline CNN -- done
 4. Transfer learning -- ResNet18, feature extraction then fine-tuning
 5. MLflow integration
 6. Optuna HPO

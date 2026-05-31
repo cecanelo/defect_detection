@@ -19,6 +19,7 @@ class CustomCNN(nn.Module):
             nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.AdaptiveAvgPool2d(1),
         )
 
         n_features = self._get_n_features(img_size)

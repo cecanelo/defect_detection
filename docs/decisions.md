@@ -37,6 +37,9 @@ Three convolutional blocks with 32, 64, 128 filters because it is a well-establi
 ### 3x3 kernels with padding=1
 All conv layers use kernel_size=3 and padding=1 because 3x3 is the industry standard for efficiency and padding=1 preserves spatial dimensions, making MaxPool the sole controller of spatial reduction.
 
+### Global Average Pooling instead of Flatten
+The classifier head uses Global Average Pooling (`nn.AdaptiveAvgPool2d(1)`) before the Linear layer because it reduces parameters from ~25.7M to ~127K while preserving feature information, reducing overfitting risk and keeping HPO iteration fast.
+
 ### Dynamic feature size calculation
 `_get_n_features()` computes the flattened size via a dummy tensor forward pass because hardcoding it breaks silently when img_size or architecture changes.
 

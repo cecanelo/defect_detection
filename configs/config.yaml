@@ -2,7 +2,7 @@ data:
   train_dir: data/train
   test_dir: data/test
   img_size: 224
-  num_workers: 4
+  num_workers: 0
 
 model:
   name: custom_cnn
@@ -12,7 +12,7 @@ model:
 
 training:
   batch_size: 32
-  epochs: 20
+  epochs: 3
   learning_rate: 0.001
   weight_decay: 1.0e-4
   beta: 2
@@ -24,7 +24,7 @@ augmentation:
 
 mlflow:
   experiment_name: casting-defect-classifier
-  tracking_uri: experiments/mlruns
+  tracking_uri: sqlite:///experiments/mlflow.db
   run_name: baseline
 
 paths:
