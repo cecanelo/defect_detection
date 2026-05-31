@@ -2,7 +2,7 @@ data:
   train_dir: data/train
   test_dir: data/test
   img_size: 224
-  num_workers: 0
+  num_workers: 4
 
 model:
   name: custom_cnn
