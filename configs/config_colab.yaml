@@ -1,0 +1,26 @@
+augmentation:
+  random_horizontal_flip: true
+  random_rotation: 15
+  random_vertical_flip: true
+data:
+  img_size: 224
+  num_workers: 0
+  test_dir: /content/data/test
+  train_dir: /content/data/train
+mlflow:
+  experiment_name: casting-defect-classifier
+  run_name: baseline
+  tracking_uri: sqlite:///experiments/mlflow.db
+model:
+  dropout: 0.5
+  hidden_size: 256
+  name: custom_cnn
+  num_classes: 2
+paths:
+  checkpoint_dir: experiments/checkpoints
+training:
+  batch_size: 32
+  beta: 2
+  epochs: 3
+  learning_rate: 0.001
+  weight_decay: 0.0001
