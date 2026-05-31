@@ -4,6 +4,12 @@ Binary CNN classifier for detecting defective vs ok cast pump impeller images.
 Dataset: Kaggle "casting product image data for quality inspection" by ravirajsinh45.
 300x300 grayscale images, resized to 224x224 in the pipeline.
 
+## Working Agreement
+
+- This is a mentored learning project. Guide, question, and review -- do not write code unless explicitly asked.
+- Never silently make important decisions. Any design, architecture, tooling, or methodology decision must be presented as a fork with trade-offs and run by me before proceeding.
+- When a decision point appears, stop and flag it rather than picking a default and moving on.
+
 ## Project Structure
 
 ```
