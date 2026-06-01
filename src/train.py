@@ -3,6 +3,7 @@ import argparse
 import torch
 import torch.nn as nn
 from torch.optim import AdamW
+from torch.optim.lr_scheduler import CosineAnnealingLR
 import mlflow
 from sklearn.metrics import recall_score, fbeta_score, accuracy_score, precision_score
 import copy
@@ -60,10 +61,12 @@ def setup_components(config: dict, device: torch.device) -> tuple:
         weight_decay=config['training']['weight_decay'],
     )
 
+    scheduler = CosineAnnealingLR(optimizer, T_max=config['training']['epochs'])
+
     logger.info(f'Model: {config["model"]["name"]}')
     logger.info(f'Trainable parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad):,}')
 
-    return model, train_loader, test_loader, criterion, optimizer
+    return model, train_loader, test_loader, criterion, optimizer, scheduler
 
 
 def train_one_epoch(
@@ -141,7 +144,7 @@ def main():
     config = apply_overrides(config, args)
     device = setup_device(config)
 
-    model, train_loader, test_loader, criterion, optimizer = setup_components(config, device)
+    model, train_loader, test_loader, criterion, optimizer, scheduler = setup_components(config, device)
 
     beta       = config['training']['beta']
     epochs     = config['training']['epochs']
@@ -165,12 +168,15 @@ def main():
             'hidden_size'  : config['model']['hidden_size'],
             'img_size'     : config['data']['img_size'],
             'beta'         : beta,
+            'scheduler'    : 'cosine',
         })
 
         for epoch in range(epochs):
 
             train_loss, train_acc = train_one_epoch(model, train_loader, criterion, optimizer, device)
             val_loss, val_acc, recall, precision, fbeta = validate(model, test_loader, criterion, device, beta)
+
+            scheduler.step()
 
             mlflow.log_metrics({
                 'train_loss' : train_loss,
@@ -180,6 +186,7 @@ def main():
                 'recall'     : recall,
                 'precision'  : precision,
                 'fbeta'      : fbeta,
+                'lr'         : optimizer.param_groups[0]['lr'],
             }, step=epoch)
 
             logger.info(
