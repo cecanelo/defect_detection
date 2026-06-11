@@ -78,3 +78,6 @@ We are using weight decay and vanilla Adam has a known bug where weight decay in
 ### Checkpointing metric: F-beta (beta=2)
 Best checkpoint is saved based on F-beta (beta=2) on the defective class, weighting recall twice as heavily as precision because a missed defect is worse than a rejected good part. Beta is config-driven but excluded from Optuna's search space, since it defines the objective rather than being optimized against it.
 
+### Learning rate scheduler: CosineAnnealingLR
+A cosine annealing scheduler decays the learning rate from the configured value to near zero over `epochs` because fixed learning rates forced a trade-off between fast learning and stable convergence, and cosine annealing adds no new hyperparameters for Optuna to search.
+
