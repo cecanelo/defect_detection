@@ -31,6 +31,9 @@ Dockerfile          # Containerized training pipeline
 
 ## Environment
 
+**Lightning AI Studio (web or SSH):** no activation needed — the `cloudspace` conda env is active by default.
+
+**Local development:**
 ```bash
 source venv/bin/activate
 ```

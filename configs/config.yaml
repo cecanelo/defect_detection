@@ -2,17 +2,18 @@ data:
   train_dir: data/train
   test_dir: data/test
   img_size: 224
-  num_workers: 4
+  num_workers: 0
 
 model:
-  name: custom_cnn
+  name: resnet18 # resnet18 or custom_cnn
+  feature_extract: true # only useful when resnet18 is chosen 
   num_classes: 2
   dropout: 0.5
   hidden_size: 256
 
 training:
   batch_size: 32
-  epochs: 20
+  epochs: 2
   learning_rate: 0.001
   weight_decay: 1.0e-4
   beta: 2
