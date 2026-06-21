@@ -60,10 +60,11 @@ def get_model(config):
     model_name  = config['model']['name']
     img_size    = config['data']['img_size']
     hidden_size = config['model']['hidden_size']
+    feature_extract = config['model'].get('feature_extract', True)
 
     if model_name == 'custom_cnn':
         return CustomCNN(num_classes, dropout, img_size, hidden_size)
     elif model_name == 'resnet18':
-        return get_resnet18(num_classes)
+        return get_resnet18(num_classes, feature_extract)
     else:
         raise ValueError(f'Unknown model name: {model_name}')
