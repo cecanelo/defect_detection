@@ -1,3 +1,0 @@
-PyYAML
-scikit-learn
-mlflow==3.12.0
